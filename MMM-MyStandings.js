@@ -286,9 +286,9 @@ Module.register("MMM-MyStandings",{
 			var sportUrls = [];
 			switch (this.config.sports[i].league) {
 				case "MLB":
-					if (this.mlb_l1.some(item => this.config.sports[i].groups.includes(item))) {
-						sportUrls.push(this.config.url + "baseball/mlb/standings?level=1&sort=gamesbehind:asc,winpercent:desc");
-					}
+					//if (this.mlb_l1.some(item => this.config.sports[i].groups.includes(item))) {
+					//	sportUrls.push(this.config.url + "baseball/mlb/standings?level=1&sort=gamesbehind:asc,winpercent:desc");
+					//}
 					if (this.mlb_l2.some(item => this.config.sports[i].groups.includes(item))) {
 						sportUrls.push(this.config.url + "baseball/mlb/standings?level=2&sort=gamesbehind:asc,winpercent:desc");
 					}
