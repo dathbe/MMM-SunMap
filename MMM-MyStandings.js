@@ -278,52 +278,55 @@ Module.register("MMM-MyStandings",{
 		var sportUrl;
 		var self = this;
 		for (var i = 0; i < this.config.sports.length; i++) {
+			sportUrls = []
 			switch (this.config.sports[i].league) {
 				case "MLB":
-					sportUrl = this.config.url + "baseball/mlb/standings?level=3&sort=gamesbehind:asc,winpercent:desc";
+					sportUrls.push(this.config.url + "baseball/mlb/standings?level=3&sort=gamesbehind:asc,winpercent:desc";
 					break;
 				case "NBA":
-					sportUrl = this.config.url + "basketball/nba/standings?level=3&sort=gamesbehind:asc,winpercent:desc";
+					sportUrls.push(this.config.url + "basketball/nba/standings?level=3&sort=gamesbehind:asc,winpercent:desc";
 					break;
 				case "NFL":
-					sportUrl = this.config.url + "football/nfl/standings?level=3&sort=winpercent:desc,playoffseed:asc";
+					sportUrls.push(this.config.url + "football/nfl/standings?level=3&sort=winpercent:desc,playoffseed:asc";
 					break;
 				case "NHL":
-					sportUrl = this.config.url + "hockey/nhl/standings?level=3&sort=points:desc,winpercent:desc,playoffseed:asc";
+					sportUrls.push(this.config.url + "hockey/nhl/standings?level=3&sort=points:desc,winpercent:desc,playoffseed:asc";
 					break;
 				case "MLS":
-					sportUrl = this.config.url + "soccer/usa.1/standings?sort=rank:asc";
+					sportUrls.push(this.config.url + "soccer/usa.1/standings?sort=rank:asc";
 					break;
 				case "NCAAF":
-					sportUrl = this.config.url + "football/college-football/standings?group=80&level=3&sort=leaguewinpercent:desc,vsconf_wins:desc,vsconf_gamesbehind:asc,vsconf_playoffseed:asc,wins:desc,losses:desc,playoffseed:asc,alpha:asc";
+					sportUrls.push(this.config.url + "football/college-football/standings?group=80&level=3&sort=leaguewinpercent:desc,vsconf_wins:desc,vsconf_gamesbehind:asc,vsconf_playoffseed:asc,wins:desc,losses:desc,playoffseed:asc,alpha:asc";
 					break;
 				case "NCAAM":
-					sportUrl = this.config.url + "basketball/mens-college-basketball/standings?group=50&sort=playoffseed:asc,vsconf_winpercent:desc,vsconf_wins:desc,vsconf_losses:asc,vsconf_gamesbehind:asc&includestats=playoffseed,vsconf,vsconf_gamesbehind,vsconf_winpercent,total,winpercent,home,road,streak,vsaprankedteams,vsusarankedteams";
+					sportUrls.push(this.config.url + "basketball/mens-college-basketball/standings?group=50&sort=playoffseed:asc,vsconf_winpercent:desc,vsconf_wins:desc,vsconf_losses:asc,vsconf_gamesbehind:asc&includestats=playoffseed,vsconf,vsconf_gamesbehind,vsconf_winpercent,total,winpercent,home,road,streak,vsaprankedteams,vsusarankedteams";
 					break;
 				case "NCAAW":
-					sportUrl = this.config.url + "basketball/womens-college-basketball/standings?group=50&sort=playoffseed:asc,vsconf_winpercent:desc,vsconf_wins:desc,vsconf_losses:asc,vsconf_gamesbehind:asc&includestats=playoffseed,vsconf,vsconf_gamesbehind,vsconf_winpercent,total,winpercent,home,road,streak,vsaprankedteams,vsusarankedteams";
+					sportUrls.push(this.config.url + "basketball/womens-college-basketball/standings?group=50&sort=playoffseed:asc,vsconf_winpercent:desc,vsconf_wins:desc,vsconf_losses:asc,vsconf_gamesbehind:asc&includestats=playoffseed,vsconf,vsconf_gamesbehind,vsconf_winpercent,total,winpercent,home,road,streak,vsaprankedteams,vsusarankedteams";
 					break;
 				case "NCAAF Rankings":
-					sportUrl = this.config.urlRanking + "football/college-football/rankings";
+					sportUrls.push(this.config.urlRanking + "football/college-football/rankings";
 					break;
 				case "NCAAM Rankings":
-					sportUrl = this.config.urlRanking + "basketball/mens-college-basketball/rankings";
+					sportUrls.push(this.config.urlRanking + "basketball/mens-college-basketball/rankings";
 					break;
 				case "NCAAW Rankings":
-					sportUrl = this.config.urlRanking + "basketball/womens-college-basketball/rankings";
+					sportUrls.push(this.config.urlRanking + "basketball/womens-college-basketball/rankings";
 					break;
 				default: //soccer
-					sportUrl = this.config.url + this.SOCCER_LEAGUE_PATHS[this.config.sports[i].league] + "/standings?sort=rank:asc";
+					sportUrls.push(this.config.url + this.SOCCER_LEAGUE_PATHS[this.config.sports[i].league] + "/standings?sort=rank:asc";
 					break;
 			}
 
-			this.sendSocketNotification(
-				"STANDINGS_RESULT-" + this.config.sports[i].league, 
-				{
-					url: sportUrl,
-					uniqueID: JSON.stringify(this.config.sports)
-				}
-			);
+			for (sportUrl in sportUrls) {
+				this.sendSocketNotification(
+					"STANDINGS_RESULT-" + this.config.sports[i].league, 
+					{
+						url: sportUrl,
+						uniqueID: JSON.stringify(this.config.sports)
+					}
+				);
+			}
 		}
 	},
 
