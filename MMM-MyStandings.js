@@ -281,28 +281,28 @@ Module.register("MMM-MyStandings",{
 			sportUrls = []
 			switch (this.config.sports[i].league) {
 				case "MLB":
-					sportUrls.push(this.config.url + "baseball/mlb/standings?level=3&sort=gamesbehind:asc,winpercent:desc";
+					sportUrls.push(this.config.url + "baseball/mlb/standings?level=3&sort=gamesbehind:asc,winpercent:desc");
 					break;
 				case "NBA":
-					sportUrls.push(this.config.url + "basketball/nba/standings?level=3&sort=gamesbehind:asc,winpercent:desc";
+					sportUrls.push(this.config.url + "basketball/nba/standings?level=3&sort=gamesbehind:asc,winpercent:desc");
 					break;
 				case "NFL":
-					sportUrls.push(this.config.url + "football/nfl/standings?level=3&sort=winpercent:desc,playoffseed:asc";
+					sportUrls.push(this.config.url + "football/nfl/standings?level=3&sort=winpercent:desc,playoffseed:asc");
 					break;
 				case "NHL":
-					sportUrls.push(this.config.url + "hockey/nhl/standings?level=3&sort=points:desc,winpercent:desc,playoffseed:asc";
+					sportUrls.push(this.config.url + "hockey/nhl/standings?level=3&sort=points:desc,winpercent:desc,playoffseed:asc");
 					break;
 				case "MLS":
-					sportUrls.push(this.config.url + "soccer/usa.1/standings?sort=rank:asc";
+					sportUrls.push(this.config.url + "soccer/usa.1/standings?sort=rank:asc");
 					break;
 				case "NCAAF":
-					sportUrls.push(this.config.url + "football/college-football/standings?group=80&level=3&sort=leaguewinpercent:desc,vsconf_wins:desc,vsconf_gamesbehind:asc,vsconf_playoffseed:asc,wins:desc,losses:desc,playoffseed:asc,alpha:asc";
+					sportUrls.push(this.config.url + "football/college-football/standings?group=80&level=3&sort=leaguewinpercent:desc,vsconf_wins:desc,vsconf_gamesbehind:asc,vsconf_playoffseed:asc,wins:desc,losses:desc,playoffseed:asc,alpha:asc");
 					break;
 				case "NCAAM":
-					sportUrls.push(this.config.url + "basketball/mens-college-basketball/standings?group=50&sort=playoffseed:asc,vsconf_winpercent:desc,vsconf_wins:desc,vsconf_losses:asc,vsconf_gamesbehind:asc&includestats=playoffseed,vsconf,vsconf_gamesbehind,vsconf_winpercent,total,winpercent,home,road,streak,vsaprankedteams,vsusarankedteams";
+					sportUrls.push(this.config.url + "basketball/mens-college-basketball/standings?group=50&sort=playoffseed:asc,vsconf_winpercent:desc,vsconf_wins:desc,vsconf_losses:asc,vsconf_gamesbehind:asc&includestats=playoffseed,vsconf,vsconf_gamesbehind,vsconf_winpercent,total,winpercent,home,road,streak,vsaprankedteams,vsusarankedteams");
 					break;
 				case "NCAAW":
-					sportUrls.push(this.config.url + "basketball/womens-college-basketball/standings?group=50&sort=playoffseed:asc,vsconf_winpercent:desc,vsconf_wins:desc,vsconf_losses:asc,vsconf_gamesbehind:asc&includestats=playoffseed,vsconf,vsconf_gamesbehind,vsconf_winpercent,total,winpercent,home,road,streak,vsaprankedteams,vsusarankedteams";
+					sportUrls.push(this.config.url + "basketball/womens-college-basketball/standings?group=50&sort=playoffseed:asc,vsconf_winpercent:desc,vsconf_wins:desc,vsconf_losses:asc,vsconf_gamesbehind:asc&includestats=playoffseed,vsconf,vsconf_gamesbehind,vsconf_winpercent,total,winpercent,home,road,streak,vsaprankedteams,vsusarankedteams)";
 					break;
 				case "NCAAF Rankings":
 					sportUrls.push(this.config.urlRanking + "football/college-football/rankings";
