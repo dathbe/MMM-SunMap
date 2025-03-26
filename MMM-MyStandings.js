@@ -197,6 +197,11 @@ Module.register("MMM-MyStandings",{
 	hasMoreDivisions: false,
 	localLogos: {},
 
+	//Options for different sports
+	mlb_l1: ["Major League Baseball"],
+	mlb_l2: ["American League","National League"],
+	mlb_l3: ["American League West", "American League Central", "American League East", "National League West", "National League Central", "National League East"],
+
 	// Start the module.
 	start: function () {
 		// Set some default for groups if not found in user config
@@ -281,7 +286,15 @@ Module.register("MMM-MyStandings",{
 			var sportUrls = [];
 			switch (this.config.sports[i].league) {
 				case "MLB":
-					sportUrls.push(this.config.url + "baseball/mlb/standings?level=3&sort=gamesbehind:asc,winpercent:desc");
+					if (this.mlb_l1.some(item => this.config.sports[i].groups.includes(item))) {
+						sportUrls.push(this.config.url + "baseball/mlb/standings?level=1&sort=gamesbehind:asc,winpercent:desc");
+					}
+					if (this.mlb_l2.some(item => this.config.sports[i].groups.includes(item))) {
+						sportUrls.push(this.config.url + "baseball/mlb/standings?level=2&sort=gamesbehind:asc,winpercent:desc");
+					}
+					if (this.mlb_l3.some(item => this.config.sports[i].groups.includes(item))) {
+						sportUrls.push(this.config.url + "baseball/mlb/standings?level=3&sort=gamesbehind:asc,winpercent:desc");
+					}
 					break;
 				case "NBA":
 					sportUrls.push(this.config.url + "basketball/nba/standings?level=3&sort=gamesbehind:asc,winpercent:desc");
@@ -302,27 +315,27 @@ Module.register("MMM-MyStandings",{
 					sportUrls.push(this.config.url + "basketball/mens-college-basketball/standings?group=50&sort=playoffseed:asc,vsconf_winpercent:desc,vsconf_wins:desc,vsconf_losses:asc,vsconf_gamesbehind:asc&includestats=playoffseed,vsconf,vsconf_gamesbehind,vsconf_winpercent,total,winpercent,home,road,streak,vsaprankedteams,vsusarankedteams");
 					break;
 				case "NCAAW":
-					sportUrls.push(this.config.url + "basketball/womens-college-basketball/standings?group=50&sort=playoffseed:asc,vsconf_winpercent:desc,vsconf_wins:desc,vsconf_losses:asc,vsconf_gamesbehind:asc&includestats=playoffseed,vsconf,vsconf_gamesbehind,vsconf_winpercent,total,winpercent,home,road,streak,vsaprankedteams,vsusarankedteams)";
+					sportUrls.push(this.config.url + "basketball/womens-college-basketball/standings?group=50&sort=playoffseed:asc,vsconf_winpercent:desc,vsconf_wins:desc,vsconf_losses:asc,vsconf_gamesbehind:asc&includestats=playoffseed,vsconf,vsconf_gamesbehind,vsconf_winpercent,total,winpercent,home,road,streak,vsaprankedteams,vsusarankedteams");
 					break;
 				case "NCAAF Rankings":
-					sportUrls.push(this.config.urlRanking + "football/college-football/rankings";
+					sportUrls.push(this.config.urlRanking + "football/college-football/rankings");
 					break;
 				case "NCAAM Rankings":
-					sportUrls.push(this.config.urlRanking + "basketball/mens-college-basketball/rankings";
+					sportUrls.push(this.config.urlRanking + "basketball/mens-college-basketball/rankings");
 					break;
 				case "NCAAW Rankings":
-					sportUrls.push(this.config.urlRanking + "basketball/womens-college-basketball/rankings";
+					sportUrls.push(this.config.urlRanking + "basketball/womens-college-basketball/rankings");
 					break;
 				default: //soccer
-					sportUrls.push(this.config.url + this.SOCCER_LEAGUE_PATHS[this.config.sports[i].league] + "/standings?sort=rank:asc";
+					sportUrls.push(this.config.url + this.SOCCER_LEAGUE_PATHS[this.config.sports[i].league] + "/standings?sort=rank:asc");
 					break;
 			}
 
-			for (sportUrl in sportUrls) {
+			for (var j = 0; j < sportUrls.length; j++) {
 				this.sendSocketNotification(
 					"STANDINGS_RESULT-" + this.config.sports[i].league, 
 					{
-						url: sportUrl,
+						url: sportUrls[j],
 						uniqueID: JSON.stringify(this.config.sports)
 					}
 				);
@@ -331,14 +344,18 @@ Module.register("MMM-MyStandings",{
 	},
 
 	socketNotificationReceived: function(notification, payload) {
-		if ( (notification.includes("Rankings")) && payload.uniqueID == JSON.stringify(this.config.sports) ) {
+		if ( notification.includes("Rankings") && payload.uniqueID == JSON.stringify(this.config.sports) ) {
 			var league = notification.split("-")[1];
 			this.standingsInfo.push(this.cleanupRankings(payload.result.rankings, league));
 			//this.standingsInfo.push(payload.result.rankings);
 			this.standingsSportInfo.push(league);
 		} else if (notification.startsWith("STANDINGS_RESULT") && payload.uniqueID == JSON.stringify(this.config.sports) ) {
 			var league = notification.split("-")[1];
-			this.standingsInfo.push(this.cleanupData(payload.result.children, league));
+			if (payload.result.standings) {
+				this.standingsInfo.push(this.cleanupData(payload.result, league));
+			} else {
+				this.standingsInfo.push(this.cleanupData(payload.result.children, league));
+			}
 			this.standingsSportInfo.push(league);
 		} else if (notification === "MMM-MYSTANDINGS-LOCAL-LOGO-LIST") {
 			this.localLogos = payload.logos;
