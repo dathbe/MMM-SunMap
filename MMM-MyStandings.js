@@ -278,7 +278,7 @@ Module.register("MMM-MyStandings",{
 		var sportUrl;
 		var self = this;
 		for (var i = 0; i < this.config.sports.length; i++) {
-			sportUrls = [];
+			var sportUrls = [];
 			switch (this.config.sports[i].league) {
 				case "MLB":
 					sportUrls.push(this.config.url + "baseball/mlb/standings?level=3&sort=gamesbehind:asc,winpercent:desc");
