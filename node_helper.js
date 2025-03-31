@@ -2,11 +2,11 @@
  * Module: Standings
  *
  */
-var NodeHelper = require('node_helper');
+const NodeHelper = require('node_helper');
 const dirTree = require("directory-tree");
 
 module.exports = NodeHelper.create({
-	start: function () {
+	start () {
 		console.log('MMM-MyStandings helper started ...');
 		
 		this.localLogos = {};
@@ -26,18 +26,23 @@ module.exports = NodeHelper.create({
 	},
 
 	async getData (notification, payload) {
-		var self = this;
-		const url = payload.url;
-		const response = await fetch(url);
-		const body = await response.json();
-		self.sendSocketNotification(notification, {
-			result: body,
-			uniqueID: payload.uniqueID
-		});
+		try {
+			const response = await fetch(payload.url);
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+			const data = await response.json();
+			this.sendSocketNotification(notification, {
+				result: data,
+				uniqueID: payload.uniqueID
+			});
+		} catch (error) {
+			console.error("[MMM-MyStandings] Could not load data.", error);
+		}
 	},
 
 	//Subclass socketNotificationReceived received.
-	socketNotificationReceived: function(notification, payload) {
+	socketNotificationReceived (notification, payload) {
 		if (notification.startsWith("STANDINGS_RESULT")) {
 			this.getData(notification, payload);
 		} else if (notification == "MMM-MYSTANDINGS-GET-LOCAL-LOGOS") {
