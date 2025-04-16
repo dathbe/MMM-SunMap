@@ -38,7 +38,7 @@ Add MMM-SunMap module to the `modules` array in the `config/config.js` file. The
 
 | Option           | Description
 | -------          |  -------
-| maxWidth         | The width of the image.<br><br>**Type:** `int`<br> **Default value:** `450`
+| height         | The height of the image in pixels.<br><br>**Type:** `int`<br> **Default value:** `450`
 | fadeSpeed        | Fade time when the image refreshes<br><br>**Type:** `int` <br> **Default value:** `500` (.5 seconds)
 | updateInterval   | Time (in seconds) between image updates.<br><br>**Type:** `int`<br> **Default value:** `15 * 60` (15 minutes)
 

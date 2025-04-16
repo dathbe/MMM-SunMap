@@ -3,7 +3,7 @@ Module.register('MMM-SunMap', {
   defaults: {
     updateInterval: 15 * 60, // every 15 minutes
     fadeSpeed: 500,
-    maxWidth: 450,
+    height: 450,
   },
 
 /*   // Define required styles.
@@ -37,7 +37,7 @@ Module.register('MMM-SunMap', {
     const wrapper = document.createElement('div')
     wrapper.className = 'SunMapDiv'
     var SunMapImage = new Image()
-    SunMapImage.width = this.config.maxWidth
+    SunMapImage.height = this.config.height
     currTime = new Date()
     //Log.error(currTime.getFullYear())
     SunMapImage.src = `https://www.timeanddate.com/scripts/sunmap.php?iso=${currTime.getFullYear()}${currTime.getMonth()}${currTime.getDate()}T${currTime.getHours()}${currTime.getMinutes()}`
