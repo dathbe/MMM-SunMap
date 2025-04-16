@@ -40,7 +40,7 @@ Module.register('MMM-SunMap', {
     SunMapImage.height = this.config.height
     currTime = new Date()
     //Log.error(currTime.getFullYear())
-    SunMapImage.src = `https://www.timeanddate.com/scripts/sunmap.php?iso=${currTime.getFullYear()}${currTime.getMonth()}${currTime.getDate()}T${currTime.getHours()}${currTime.getMinutes()}`
+    SunMapImage.src = `https://www.timeanddate.com/scripts/sunmap.php?iso=${currTime.getFullYear()}${currTime.getMonth()}${currTime.getDate()}T${currTime.getHours()}${currTime.getMinutes()}&earth=1`
     wrapper.appendChild(SunMapImage)
     return wrapper
   }
