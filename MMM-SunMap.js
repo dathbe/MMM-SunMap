@@ -1,8 +1,8 @@
 Module.register('MMM-SunMap', {
   // Default module config.
   defaults: {
-    updateInterval: 15 * 60 * 1000, // every 15 minutes
-    fadeSpeed: 2000,
+    updateInterval: 15 * 60, // every 15 minutes
+    fadeSpeed: 500,
     maxWidth: 450,
   },
 
@@ -22,7 +22,7 @@ Module.register('MMM-SunMap', {
     var self = this
     setInterval(function () {
       self.updateDom(this.config.fadeSpeed)
-    }, this.config.updateInterval)
+    }, this.config.updateInterval * 1000)
   },
 
 
