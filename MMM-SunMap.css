@@ -1,8 +1,6 @@
 /* Container holding the image and the text */
 .MMM-SunMap .SunMapDiv {
   position: relative;
-  text-align: center;
-  color: white;
 }
 
 /* text */
@@ -10,6 +8,6 @@
   position: absolute;
   bottom: 8px;
   right: 12px;
-  color: blue;
+  color: grey;
   font-size: 16px;
 }
