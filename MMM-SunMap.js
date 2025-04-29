@@ -22,6 +22,7 @@ Module.register('MMM-SunMap', {
     var self = this
     setInterval(function () {
       self.updateDom(this.config.fadeSpeed)
+      Log.error('[MMM-SunMap] Updating image')
     }, this.config.updateInterval * 1000)
   },
 
