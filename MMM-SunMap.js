@@ -11,10 +11,10 @@ Module.register('MMM-SunMap', {
     return ['MMM-MyStandings.css']
   }, */
 
-/*   // Start the module.
+  // Start the module.
   start: function () {
-    
-  }, */
+    Log.info('Starting module: ' + this.name)
+  },
 
   firstLoad: function () {
 
