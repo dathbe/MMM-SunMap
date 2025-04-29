@@ -1,8 +1,8 @@
 Module.register('MMM-SunMap', {
   // Default module config.
   defaults: {
-    updateInterval: 15 * 60, // every 15 minutes
-    fadeSpeed: 500,
+    updateInterval: 15, // minutes
+    // fadeSpeed: 500,
     height: 450,
   },
 
@@ -17,30 +17,25 @@ Module.register('MMM-SunMap', {
   },
 
   firstLoad: function () {
-
     // Schedule the UI load based on normal interval
     var self = this
     setInterval(function () {
-      self.updateDom(this.config.fadeSpeed)
-      Log.error('[MMM-SunMap] Updating image')
-    }, this.config.updateInterval * 1000)
+      self.updateDom()
+    }, this.config.updateInterval * 60 * 1000)
   },
-
 
   notificationReceived: function (notification) {
     if (notification === 'DOM_OBJECTS_CREATED') {
       this.firstLoad()
     }
   },
-  
+
   getDom() {
-    const self = this
     const wrapper = document.createElement('div')
     wrapper.className = 'SunMapDiv'
     var SunMapImage = new Image()
     SunMapImage.height = this.config.height
-    currTime = new Date()
-    //Log.error(currTime.getFullYear())
+    var currTime = new Date()
     SunMapImage.src = `https://www.timeanddate.com/scripts/sunmap.php?iso=${currTime.getFullYear()}${currTime.getMonth()}${currTime.getDate()}T${currTime.getHours()}${currTime.getMinutes()}&earth=1`
     wrapper.appendChild(SunMapImage)
 
@@ -50,5 +45,5 @@ Module.register('MMM-SunMap', {
     wrapper.appendChild(textBox)
 
     return wrapper
-  }
+  },
 })
