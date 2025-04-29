@@ -6,10 +6,10 @@ Module.register('MMM-SunMap', {
     height: 450,
   },
 
-/*   // Define required styles.
+  // Define required styles.
   getStyles: function () {
-    return ['MMM-MyStandings.css']
-  }, */
+    return ['MMM-SunMap.css']
+  },
 
   // Start the module.
   start: function () {
@@ -42,6 +42,12 @@ Module.register('MMM-SunMap', {
     //Log.error(currTime.getFullYear())
     SunMapImage.src = `https://www.timeanddate.com/scripts/sunmap.php?iso=${currTime.getFullYear()}${currTime.getMonth()}${currTime.getDate()}T${currTime.getHours()}${currTime.getMinutes()}&earth=1`
     wrapper.appendChild(SunMapImage)
+
+    const textBox = document.createElement('div')
+    textBox.className = 'date-time'
+    textBox.innerHTML = currTime.toLocaleString()
+    wrapper.appendChild(textBox)
+
     return wrapper
   }
 })
